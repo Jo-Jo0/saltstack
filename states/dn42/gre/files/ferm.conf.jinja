@@ -1,0 +1,22 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+
+# Allow GRE (Protocol 47)
+#
+domain (ip ip6)
+table filter
+chain INPUT
+proto gre ACCEPT;
+
+
+# Disable connection tracking for the GRE tunnel
+#
+domain (ip ip6)
+table raw
+chain PREROUTING
+proto gre {
+  {% for peer, values in pillar['dn42']['peers'].iteritems() -%}
+  saddr {{ values['remote'] }} NOTRACK;
+  {% endfor %}
+}
+

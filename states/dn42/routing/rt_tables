@@ -1,0 +1,15 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+#
+# reserved values
+#
+255     local
+254     main
+253     default
+0       unspec
+#
+# local
+#
+#1      inr.ruhep
+100 private
+190 sink

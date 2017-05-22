@@ -1,0 +1,27 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+[Match]
+Name = {{ remote }}.gre
+
+
+[Network]
+Description = GRE Link to {{ remote }}
+
+# No link lokal addressing
+LinkLocalAddressing = no
+
+# Don't accept any other addresses
+IPv6AcceptRA = no
+
+[Address]
+{% if pillar.dn42.peers[remote].tun4.mask == 31 -%}
+Address = {{ pillar.dn42.peers[remote].tun4.left}}/32
+Peer = {{ pillar.dn42.peers[remote].tun4.right}}/32
+{% else %}
+Address = {{ pillar.dn42.peers[remote].tun4.left}}/{{ pillar.dn42.peers[remote].tun4.mask}}
+{% endif %}
+
+{% if 'tun6' in pillar.dn42.peers[remote].keys() -%}
+[Address]
+Address = {{ pillar.dn42.peers[remote].tun6.left}}/{{ pillar.dn42.peers[remote].tun6.mask}}
+{% endif %}
