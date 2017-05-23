@@ -39,7 +39,7 @@ conn tun-{{ peer }}
 	left={{ pillar.dn42.hosts[grains['id']].public.ipv4 }}
 	{% endif -%}
 	right={{ values['remote'] }}
-	leftrsasigkey=/etc/ipsec.d/public/voyager.pem
+	leftrsasigkey=/etc/ipsec.d/public/{{ salt['grains.get']('host')}}.pem
 	rightrsasigkey=/etc/ipsec.d/public/{{ peer }}.pub
 	keyexchange={{ values['keyexchange']}}
 	ike={{ values['ike'] }}
