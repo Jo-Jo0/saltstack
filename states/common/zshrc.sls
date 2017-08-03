@@ -1,14 +1,7 @@
-include:
-  - tools
-
-zsh:
-    pkg.latest:
-        - name:  zsh
-
 zshrc:
     file.managed:
         - name: /root/.zshrc
-        - source: salt://zsh/files/zshrc.tmpl
+        - source: salt:/common/files/zshrc.tmpl
         - makedirs: true
         - template: jinja
 
