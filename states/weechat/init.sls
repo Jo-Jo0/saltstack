@@ -1,6 +1,3 @@
-include:
-  - tools
-
 weechat:
   pkg.latest:
     - name: weechat
